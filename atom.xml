@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://w0w0w0w.github.io</id>
     <title>jibin&apos;s blogs</title>
-    <updated>2022-02-28T07:54:03.738Z</updated>
+    <updated>2022-02-28T08:03:27.128Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://w0w0w0w.github.io"/>
     <link rel="self" href="https://w0w0w0w.github.io/atom.xml"/>
@@ -11,16 +11,16 @@
     <icon>https://w0w0w0w.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, jibin&apos;s blogs</rights>
     <entry>
-        <title type="html"><![CDATA[Introduction To pass in new pass managers]]></title>
+        <title type="html"><![CDATA[Introduction of pass in new pass managers]]></title>
         <id>https://w0w0w0w.github.io/post/introduction-to-pass-in-new-pass-managers/</id>
         <link href="https://w0w0w0w.github.io/post/introduction-to-pass-in-new-pass-managers/">
         </link>
         <updated>2022-02-27T06:51:50.000Z</updated>
-        <summary type="html"><![CDATA[<p>While the new pass manager had been introduced since LLVM9(or 8), it is inevitable for us to create pass in the new way which although is struggling.(For me, legacy one works not bad and very simple.(<sup>o</sup>)／）<br>
+        <summary type="html"><![CDATA[<p>While the new pass manager had been introduced since LLVM9(or 8), it is inevitable for us to create pass in the new way which although is struggling.(For me, legacy one works not bad and very simple.(๑•̀ㅂ•́)و✧<br>
 But new PM come to us with pretty much benifits. For example, it provide new interface to make easy use of the imformation from anther analysis pass.😃<br>
 I will introduce the new PM for the guys who have used the legacy PM.</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>While the new pass manager had been introduced since LLVM9(or 8), it is inevitable for us to create pass in the new way which although is struggling.(For me, legacy one works not bad and very simple.(<sup>o</sup>)／）<br>
+        <content type="html"><![CDATA[<p>While the new pass manager had been introduced since LLVM9(or 8), it is inevitable for us to create pass in the new way which although is struggling.(For me, legacy one works not bad and very simple.(๑•̀ㅂ•́)و✧<br>
 But new PM come to us with pretty much benifits. For example, it provide new interface to make easy use of the imformation from anther analysis pass.😃<br>
 I will introduce the new PM for the guys who have used the legacy PM.</p>
 <!-- more -->
@@ -56,6 +56,11 @@ llvmGetPassPluginInfo() {
 <p>IF you finished these all, you could move from legecy PM to New PM easily. But you almost lose all new amazing features provided from New PM.</p>
 <h2 id="amazing-with-new-pm">Amazing with New PM</h2>
 <p>----updating----</p>
+<p>Referrence:</p>
+<ol>
+<li>https://blog.llvm.org/posts/2021-03-26-the-new-pass-manager</li>
+<li>https://llvm.org/docs/NewPassManager.html</li>
+</ol>
 ]]></content>
     </entry>
     <entry>
