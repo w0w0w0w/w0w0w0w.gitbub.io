@@ -7,7 +7,7 @@
 <meta name="description" content="All in papers, but nothing special. (*￣︶￣)">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://w0w0w0w.github.io/favicon.ico?v=1645945679813">
+<link rel="shortcut icon" href="https://w0w0w0w.github.io/favicon.ico?v=1646034712205">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -93,6 +93,36 @@ But new PM come to us with pretty much benifits. For example, it provide new int
 I will introduce the new PM for the guys who have used the legacy PM.</p>
 <!-- more -->
 <h2 id="i-just-want-to-make-new-thing-look-like-old-onehope-not-just-me-having-this-kind-of-idea">I just want to make new thing look like old one.(Hope not just me having this kind of idea.)</h2>
+<ul>
+<li>Pass Inherit from llvm::PassInfoMixin or llvm::AnalysisInfoMixin based on which kind of pass you writting. But if you don't need your AnalysisInfo beeing used by other pass or user(coder..), just choose PassInfoMixin which is good enough for most situation.</li>
+<li>IF you choose PassInfoMixin, the function must need to be implemented is run. For example:<br>
+<code>llvm::PreservedAnalyses run(llvm::Function &amp;Func,llvm::FunctionAnalysisManager &amp;FAM);</code></li>
+<li>PreservedAnalyses(the return value of run) determine if pass manager should manage😅 the pipeline of pass again.<br>
+For more and example, the llvm::PreservedAnalyses::none() or llvm::PreservedAnalyses::all(), are the default option for me.</li>
+<li>The register of New PM commend coder use two function.<pre><code>llvm::PassPluginLibraryInfo get_yourpass_Info() {
+return {LLVM_PLUGIN_API_VERSION, &quot;yourpass_name&quot;, LLVM_VERSION_STRING,
+        [](PassBuilder &amp;PB) {
+          PB.registerPipelineParsingCallback(
+              [](StringRef Name, ModulePassManager &amp;MPM,
+                 ArrayRef&lt;PassBuilder::PipelineElement&gt;) {
+                if (Name == &quot;yourpass&quot;) {
+                  MPM.addPass(yourpass());
+                  return true;
+                }
+                return false;
+              });
+        }};
+</code></pre>
+</li>
+</ul>
+<p>}</p>
+<p>extern &quot;C&quot; LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo<br>
+llvmGetPassPluginInfo() {<br>
+return get_yourpass_Info();<br>
+}</p>
+<pre><code>IF you finished these all, you could move from legecy PM to New PM easily. But you almost lose all new amazing feature provided from New PM.
+## Amazing with New PM
+----updating----</code></pre>
 
             </div>
           </article>
@@ -116,7 +146,7 @@ I will introduce the new PM for the guys who have used the legacy PM.</p>
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://w0w0w0w.github.io/images/avatar.png?v=1645945679813" class="no-responsive avatar">
+    <img src="https://w0w0w0w.github.io/images/avatar.png?v=1646034712205" class="no-responsive avatar">
     <div class="text-muted">All in papers, but nothing special. (*￣︶￣)</div>
     <div class="social-container">
       
@@ -160,7 +190,7 @@ I will introduce the new PM for the guys who have used the legacy PM.</p>
     </div>
     <div class="row">
       
-        <a href="https://w0w0w0w.github.io/tag/o8SVVmkGf/" class="badge warning">
+        <a href="https://w0w0w0w.github.io/tag/o8SVVmkGf/" class="badge success">
           Gridea
         </a>
       

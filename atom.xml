@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://w0w0w0w.github.io</id>
     <title>jibin&apos;s blogs</title>
-    <updated>2022-02-27T10:02:04.880Z</updated>
+    <updated>2022-02-28T07:52:04.559Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://w0w0w0w.github.io"/>
     <link rel="self" href="https://w0w0w0w.github.io/atom.xml"/>
@@ -25,6 +25,36 @@ But new PM come to us with pretty much benifits. For example, it provide new int
 I will introduce the new PM for the guys who have used the legacy PM.</p>
 <!-- more -->
 <h2 id="i-just-want-to-make-new-thing-look-like-old-onehope-not-just-me-having-this-kind-of-idea">I just want to make new thing look like old one.(Hope not just me having this kind of idea.)</h2>
+<ul>
+<li>Pass Inherit from llvm::PassInfoMixin or llvm::AnalysisInfoMixin based on which kind of pass you writting. But if you don't need your AnalysisInfo beeing used by other pass or user(coder..), just choose PassInfoMixin which is good enough for most situation.</li>
+<li>IF you choose PassInfoMixin, the function must need to be implemented is run. For example:<br>
+<code>llvm::PreservedAnalyses run(llvm::Function &amp;Func,llvm::FunctionAnalysisManager &amp;FAM);</code></li>
+<li>PreservedAnalyses(the return value of run) determine if pass manager should manage😅 the pipeline of pass again.<br>
+For more and example, the llvm::PreservedAnalyses::none() or llvm::PreservedAnalyses::all(), are the default option for me.</li>
+<li>The register of New PM commend coder use two function.<pre><code>llvm::PassPluginLibraryInfo get_yourpass_Info() {
+return {LLVM_PLUGIN_API_VERSION, &quot;yourpass_name&quot;, LLVM_VERSION_STRING,
+        [](PassBuilder &amp;PB) {
+          PB.registerPipelineParsingCallback(
+              [](StringRef Name, ModulePassManager &amp;MPM,
+                 ArrayRef&lt;PassBuilder::PipelineElement&gt;) {
+                if (Name == &quot;yourpass&quot;) {
+                  MPM.addPass(yourpass());
+                  return true;
+                }
+                return false;
+              });
+        }};
+</code></pre>
+</li>
+</ul>
+<p>}</p>
+<p>extern &quot;C&quot; LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo<br>
+llvmGetPassPluginInfo() {<br>
+return get_yourpass_Info();<br>
+}</p>
+<pre><code>IF you finished these all, you could move from legecy PM to New PM easily. But you almost lose all new amazing feature provided from New PM.
+## Amazing with New PM
+----updating----</code></pre>
 ]]></content>
     </entry>
     <entry>
